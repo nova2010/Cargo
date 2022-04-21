@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/menu.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/driver.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous">
+    <title>Driver list</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="header">
+        <h1>Cargo transportation</h1>
+    </div>
+    <div class="contentWrapper">
+        <div class="navigation">
+            <ul class="menu">
+                <li><a href="/auto">Autos</a></li>
+                <li><a href="/customer">Customers</a></li>
+                <li><a href="/driver">Drivers</a></li>
+                <li><a href="/order">Orders</a></li>
+            </ul>
+        </div>
+
+        <div class="driverInfo">
+            <p><a href="driver/create" class="createDriverButton">Create driver</a></p>
+            <div th:switch="${drivers}">
+                <h2 th:case="null">No drivers found!</h2>
+                <div th:case="*">
+                    <h2>Drivers</h2>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Experience</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Phone number</th>
+                            <th>Passport number</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="driver : ${drivers}">
+                            <td th:text="${driver.id}"></td>
+                            <td th:text="${driver.experience}"></td>
+                            <td th:text="${driver.firstName}"></td>
+                            <td th:text="${driver.lastName}"></td>
+                            <td th:text="${driver.mobTel}"></td>
+                            <td th:text="${driver.passportNum}"></td>
+                            <td>
+                                <a th:href="@{driver/update/{id}(id=${driver.id})}" class="editDriver">
+                                    Edit
+                                </a>
+                                <a th:href="@{driver/delete/{id}(id=${driver.id})}" class="deleteDriver">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <h1>@ LCT Leonenya Cargo Transportation</h1>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/menu.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/auto.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous">
+    <title>Auto list</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="header">
+        <h1>Cargo transportation</h1>
+    </div>
+    <div class="contentWrapper">
+        <div class="navigation">
+            <ul class="menu">
+                <li><a href="/auto">Autos</a></li>
+                <li><a href="/customer">Customers</a></li>
+                <li><a href="/driver">Drivers</a></li>
+                <li><a href="/order">Orders</a></li>
+            </ul>
+        </div>
+
+        <div class="autoInfo">
+            <p><a href="auto/create" class="createAutoButton">Create auto</a></p>
+            <div th:switch="${autos}">
+                <h2 th:case="null">No auto found!</h2>
+                <div th:case="*">
+                    <h2>Autos</h2>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Brand</th>
+                            <th>Color</th>
+                            <th>Lifting capacity</th>
+                            <th>Number</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="auto : ${autos}">
+                            <td th:text="${auto.id}"></td>
+                            <td th:text="${auto.brand}"></td>
+                            <td th:text="${auto.color}"></td>
+                            <td th:text="${auto.liftingCapacity}"></td>
+                            <td th:text="${auto.number}"></td>
+                            <td>
+                                <a th:href="@{auto/update/{id}(id=${auto.id})}" class="editAuto">
+                                    Edit
+                                </a>
+                                <a th:href="@{auto/delete/{id}(id=${auto.id})}" class="deleteAuto">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <h1>@ LCT Leonenya Cargo Transportation</h1>
+    </div>
+</div>
+</body>
+</html>

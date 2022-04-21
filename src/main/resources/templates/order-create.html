@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/menu.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/orderCreate.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous">
+    <title>Order create</title>
+</head>
+<body>
+<div class="wrapper">
+
+    <div class="header">
+        <h1>Cargo transportation</h1>
+    </div>
+
+    <div class="contentWrapper">
+        <div class="navigation">
+            <ul class="menu">
+                <li><a href="/auto">Autos</a></li>
+                <li><a href="/customer">Customers</a></li>
+                <li><a href="/driver">Drivers</a></li>
+                <li><a href="/order">Orders</a></li>
+            </ul>
+        </div>
+
+        <div class="orderCreateForm">
+            <h1>New Order</h1>
+            <form action="#" th:action="@{/order/create}" th:object="${order}" method="post">
+
+                <label for="amount" class="required">Amount</label>
+                <input type="text" th:field="*{amount}" id="amount" placeholder="Amount" class="textField"/>
+
+                <label for="cargoDesc" class="required">Cargo description</label>
+                <input type="text" th:field="*{cargoDesc}" id="cargoDesc" placeholder="Cargo description" class="textField"/>
+
+                <label for="loadingAddress" class="required">Loading address</label>
+                <input type="text" th:field="*{loadingAddress}" id="loadingAddress" placeholder="Loading address" class="textField"/>
+
+                <label for="unloadingAddress" class="required">Unloading address</label>
+                <input type="text" th:field="*{unloadingAddress}" id="unloadingAddress" placeholder="Unloading address" class="textField"/>
+
+                <label for="auto" class="required">Auto</label>
+                <select th:field="*{auto}" class="textField" id="auto">
+                    <option value=""> -- </option>
+                    <option th:each="auto : ${autos}" th:value="${auto.id}" th:utext="${auto.number}"></option>
+                </select>
+
+                <label for="customer" class="required">Customer</label>
+                <select th:field="*{customer}" class="textField" id="customer">
+                    <option value=""> -- </option>
+                    <option th:each="customer : ${customers}" th:value="${customer.id}" th:utext="${customer.name}"></option>
+                </select>
+
+                <label for="driver" class="required">Driver</label>
+                <select th:field="*{driver}" class="textField" id="driver">
+                    <option value=""> -- </option>
+                    <option th:each="driver : ${drivers}" th:value="${driver.id}" th:utext="${driver.mobTel}"></option>
+                </select>
+
+                <button type="submit" class="createOrderButton">Create Order</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h1>@ LCT Leonenya Cargo Transportation</h1>
+    </div>
+
+</div>
+</body>
+</html>
